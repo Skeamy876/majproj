@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Book Exchange</title>
+    
+</head>
+<body>
+    {%block content%}
+        <h2>Notifications</h2>
+        {{book_requests|length}}
+        {%if book_requests|length == 0%}
+        <p>No new notifications</p>
+        {%else%}
+            <ul>
+                {%for update in book_requests%}
+                    <li>
+                        <p>{{update.book.title}} has been request by {{update.requester}} on {{update.created_at}}</p>
+                        <form method="post"action="{% url 'userview' user.username %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="request_id" value="{{update.id}}" >
+                            <input type="submit" value="Accept" name="accept" class="btn btn-success">
+                        </form>
+                        <form method="post" action="{% url 'userview' user.username %}">
+                            {% csrf_token %}
+                            <input type="hidden" name="request_id" value="{{update.id}}" >
+                            <input type="submit" name="reject" value="Reject" class="btn btn-danger">
+                        </form>
+                    </li>
+                {%endfor%}
+            </ul>
+        {%endif%}
+        <h2>My Requests</h2>
+        {% if request_user == user %}
+            <ul>
+                {% for sent in book_request_for_requester %}
+                    <li>
+                        <p>Exchange request for {{sent.book.title}} on {{sent.created_at}}</p>
+                        <p>{{sent.status|upper}}</p>
+                        <input type="button" value="Cancel" class="btn btn-danger">
+                    </li>
+                {% endfor %}
+            </ul>  
+        {% endif %}
+
+
+    {%endblock%}
+    
+</body>
+</html>

@@ -1,0 +1,47 @@
+{%extends "exchange/base.html" %}
+{%block title%}
+{%endblock%}
+{%block content%}
+  {% if user.is_authenticated%}
+    <div class="ms-3">
+      <h1>Welcome, {{user.first_name}}</h1>
+
+
+      <div class="container ms-0">
+        <div class="row ms-lg-0">
+          <div class="col">
+            <h3 class="mt-5 ">Books</h3>
+            <ul class="list-group mb-lg-4" style="width: 300px;">
+              {% for book in books %}
+              <li class="list-group-item">{{ book.title }} by {{ book.author }}
+              </li>
+              {% endfor %}
+            </ul>
+          
+            <h3 class="mt-5">Search for a book</h3>
+            <div class="input-group" style="width: 400px;">
+              <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+              <button type="button" class="btn btn-outline-primary">search</button>
+            </div>
+          
+            <div class="btn-group mt-3 mb-3 " role="group" aria-label="Basic mixed styles example">
+              <button type="button" class="btn btn-danger"> <a href="{% url 'remove_book' %}">Remove Book</button>
+              <button type="button" class="btn btn-warning"><a href="{% url 'add_book_request' user.id %}">Add Books</button>
+              <button type="button" class="btn btn-success"><a href="{% url 'request_books' request.user.id %}">Request Books</a> </button>
+            </div>
+          </div>
+          <div class="col ms-5">
+            {%include 'exchange/Components/activities_component.html'%}
+          </div>
+        </div>
+      </div>
+    </div>
+  {%endif%}
+
+ 
+ 
+ 
+ 
+
+  
+{%endblock%}
