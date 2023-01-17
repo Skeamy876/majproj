@@ -10,3 +10,4 @@ from exchange.models import User
             'username': 'testuser',
             'password': 'secret'}
         User.objects.create(**self.credentials) """
+        #The following line is the one that is causing the error
