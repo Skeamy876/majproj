@@ -1,7 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
 from django.core.exceptions import ValidationError
-from django.db.models import Q
 
 
 # Create your models here.
@@ -29,14 +28,6 @@ class Book(models.Model):
     def __str__(self):
         return self.title
 
-
-    def search_books(self, query):
-        """
-        Search for books by title or author
-        """
-        # Use the `Q` object to build a complex lookup with the `title` and `author` fields
-        books = Book.objects.filter(Q(title__icontains=query) | Q(author__icontains=query))
-        return books
        
 class book_exchange_model(models.Model):
     users = models.ManyToManyField(User, related_name='user')

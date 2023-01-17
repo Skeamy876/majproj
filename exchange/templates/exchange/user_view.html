@@ -19,10 +19,15 @@
             </ul>
           
             <h3 class="mt-5">Search for a book</h3>
-            <div class="input-group" style="width: 400px;">
-              <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
-              <button type="button" class="btn btn-outline-primary">search</button>
-            </div>
+            <form method="POST" action="{% url 'search_for_book' %}">
+              {% csrf_token %}
+              <div class="input-group" style="width: 400px;">
+                <input type="search" class="form-control rounded" placeholder="Search" aria-label="Search" aria-describedby="search-addon" />
+                <button type="button" class="btn btn-outline-primary">
+                  Search
+                </button>
+              </div>
+            </form>
           
             <div class="btn-group mt-3 mb-3 " role="group" aria-label="Basic mixed styles example">
               <button type="button" class="btn btn-danger"> <a href="{% url 'remove_book' %}">Remove Book</button>

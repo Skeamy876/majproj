@@ -56,6 +56,13 @@ class AcceptForm(forms.Form):
 class RejectForm(forms.Form):
     request_id = forms.IntegerField(widget=forms.HiddenInput())
 
+class CancelForm(forms.Form):
+    request_id = forms.IntegerField(widget=forms.HiddenInput())
+
+
+class SearchForm(forms.Form):
+    search = forms.CharField(max_length=100, required=False, label='')
+
 
 
 

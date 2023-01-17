@@ -1,9 +1,11 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from exchange.forms import myUserCreationform, UserLoginForm, add_book, AcceptForm, RejectForm
+from exchange.forms import myUserCreationform, UserLoginForm, add_book, AcceptForm, RejectForm, CancelForm, SearchForm
 from django.contrib.auth import authenticate, login, logout
 from django.contrib import messages
 from django.contrib.auth.decorators import login_required
 from .models import User, Book, BookRequest
+from django.db.models import Q
+
 # Create your views here.
     
 #Base index view
@@ -152,6 +154,15 @@ def userview(request, username):
                 request_id = form.cleaned_data['request_id']
                 decline_book_request(request, request_id)
 
+    if request.method == 'POST':
+        if 'cancel' in request.POST:
+            form=CancelForm(request.POST)
+            if form.is_valid():
+                request_id=form.cleaned_data['request_id']
+                book_requester_myrequest=BookRequest.objects.get(id=request_id)
+                book_requester_myrequest.delete()
+                return redirect('userview', username=request.user.username)
+
     return render(request, 'exchange/user_view.html',{
         'user':user,
         'books':books,
@@ -159,4 +170,21 @@ def userview(request, username):
         'request_user':request_user,
         'book_requests':book_requests,
         })
+
+def search(request):
+    if request.method == 'POST':
+        form = SearchForm(request.POST)
+        if form.is_valid():
+            search = form.cleaned_data['search']
+            books = Book.objects.filter(Q(title__icontains=search) | Q(author__icontains=search))
+
+            return render(request, 'exchange/search.html', {'form': form, 'search': search, 'books': books})
+    else:
+        form = SearchForm()
+    return render(request, 'exchange/search.html', {'form': form})
+    
+
+    
+    
+
 

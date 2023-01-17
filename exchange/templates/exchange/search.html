@@ -1,0 +1,20 @@
+{% extends 'exchange/base.html' %}
+
+
+{% block title %}
+<h3>Search Results for {{search}}</h3>
+{% endblock %}
+
+
+{% block content %}
+
+<ul>
+    {% for book in books %}
+    <li>
+        <a href="{% url 'book_details' book.id %}">{{ book.title }}</a>
+    </li>
+    {% endfor %}
+</ul>
+
+
+{% endblock%}
