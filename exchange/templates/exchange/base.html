@@ -14,17 +14,38 @@
         text-decoration: none;
         color: white;
       }
-      .main{
+
+      main{
         margin-left:100px;
         padding: 0px 0px;
         margin-left: 0px;
-      }   
+        background-color: #fefae0;
+        
+      }
+      .Title-basePage {
+        display: grid;
+        text-align: center;
+        font-size: 50px;
+        color: #d4a373;
+       
+      } 
+      .baseLogo {
+        display: block;
+        margin-left: auto;
+        margin-right: auto;
+        width: 20%;
+        height: 20%;
+      }
       </style>
   </head>
 <body>
-    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  {% load static %}
+
+    <nav class="navbar navbar-expand-lg" style="background-color: #d4a373;">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">Book Exchange</a>
+          <a class="navbar-brand" href="{% url 'base' %}">
+            <img src= "{% static 'images/BookExchangeLogo.png' %}" alt="Logo" width="40" height="24" class="d-inline-block align-text-top">
+            Book Exchange</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
@@ -54,24 +75,25 @@
           </div>
         </div>
       </nav>
-     <br></br> 
-    {% block title%}
-    <h1>Book Exchange</h1>
-    {% endblock %}
 
-    <div class="ms-3 text-dark">
-      {% block content %}
-    {% endblock %}
-    </div>
 
-    
-          {% if messages %}
-              <ul class="messages">
-              {% for message in messages %}
-              <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
-              {% endfor %}
-                </ul>
-          {% endif %}
+    <main>   
+      {% block title%}
+      <h1 class="Title-basePage">Book Exchange</h1>
+      <img src= "{% static 'images/BookExchangeLogo.png' %}" alt="Logo" width="100" height="100" class="baseLogo">
+      {% endblock %}
+      <div class="ms-3 text-dark">
+        {% block content %}
+        {% endblock %}
+      </div>
+            {% if messages %}
+                <ul class="messages">
+                {% for message in messages %}
+                <li{% if message.tags %} class="{{ message.tags }}"{% endif %}>{{ message }}</li>
+                {% endfor %}
+                  </ul>
+            {% endif %}
+    </main>
 
             
 

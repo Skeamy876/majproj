@@ -1,6 +1,7 @@
 from django.db import models
 from django.contrib.auth.models import AbstractUser
-from django.core.exceptions import ValidationError
+from django.urls import reverse
+
 
 
 # Create your models here.
@@ -17,6 +18,9 @@ class User(AbstractUser):
 
     def __str__(self):
         return self.username
+
+    def get_absolute_url(self):
+        return reverse('userview', kwargs={'username':self.username})
     
 class Book(models.Model):
     title = models.CharField(max_length=50)

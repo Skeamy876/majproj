@@ -1,13 +1,15 @@
 from django.urls import path
 from . import views
+from exchange.views import (RegistrationView, LoginView, BaseView, logout_request)
 
 
 urlpatterns = [
-    path('', views.base, name='base'),
-    path('register/', views.register_request, name='register'),
-    path('login/', views.login_request, name='login'),
+    path('', BaseView.as_view(), name='base'),
+    path('register/', RegistrationView.as_view(), name='register'),
+    path('login/', LoginView.as_view(), name='login'),
     path('accounts/<str:username>/', views.userview, name='userview' ),
-    path('logout/', views.logout_request, name='logout'),
+   # path('accounts/<str:username>/', UserView.as_view(), name='userview'),
+    path('logout/', logout_request.as_view(), name='logout'),
     path('accounts/<str:username>/addbook/', views.add_book_request, name='add_book_request'),
     path('accounts/<str:username>/requestbook/', views.request_books, name='request_books'),
     path('add-book/<int:bk>/', views.book_detail, name='book_details'),

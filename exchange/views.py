@@ -1,63 +1,59 @@
 from django.shortcuts import render, redirect, get_object_or_404, HttpResponse
-from exchange.forms import myUserCreationform, UserLoginForm, add_book, AcceptForm, RejectForm, CancelForm, SearchForm
 from django.contrib.auth import authenticate, login, logout
-from django.contrib import messages
 from django.contrib.auth.decorators import login_required
+from django.urls import reverse
+from django.utils.decorators import method_decorator
+from exchange.forms import myUserCreationform, UserLoginForm, add_book, AcceptForm, RejectForm, CancelForm, SearchForm
+from django.views.generic import ListView, DetailView, CreateView, UpdateView, DeleteView, View, FormView, TemplateView
+from django.contrib import messages
+
 from .models import User, Book, BookRequest
 from django.db.models import Q
 
 # Create your views here.
     
 #Base index view
-def base(request):
-    return render(request, 'exchange/base.html',{})
+class BaseView(TemplateView):
+    template_name = 'exchange/base.html'
 
-#registration view
-def register_request(request):
-    if request.method=='POST':
-        regform = myUserCreationform(request.POST)
-        if regform.is_valid():
-            username = regform.cleaned_data['username']
-            password = regform.cleaned_data['password1']
-            email = regform.cleaned_data['email']
-            first_name = regform.cleaned_data['first_name']
-            last_name = regform.cleaned_data['last_name']
-            has_books = regform.cleaned_data['has_books']
-            user = User.objects.create_user(username=username, password=password, email=email, first_name=first_name, last_name=last_name, has_books=has_books)
-            user.save()
-            return redirect('login')
-        else:
-            messages.error(request, 'Invalid form')
-            return render(request, 'exchange/register.html',{'form':regform})
+
+class RegistrationView(CreateView):
+    model = User
+    template_name = 'exchange/register.html'
+    form_class = myUserCreationform
+    success_url = '/login/'
+
+
+class LoginView(FormView):
+    model = User
+    template_name = 'exchange/login.html'
+    form_class = UserLoginForm
+
+    def form_valid(self, form):
+        username = form.cleaned_data['username']
+        password = form.cleaned_data['password']
+        user = authenticate(self.request, username=username, password=password)
+        if user is not None:
+            login(self.request, user)
+            super().form_valid(form) 
+            return redirect('userview', username=user.username)
             
-    else:
-        regform = myUserCreationform()
-        return render(request, 'exchange/register.html',{'form':regform})
-
-#login view
-def login_request(request):
-    if request.method=='POST':
-        form = UserLoginForm(request.POST)
-        if form.is_valid():
-            username = form.cleaned_data['username']
-            password = form.cleaned_data['password']
-            user = authenticate(username=username, password=password)
-            if user is not None:
-                login(request, user)
-                return redirect('userview', username=user.username)
-            else:
-                messages.error(request, 'Invalid username or password')
-                return render(request, 'exchange/login.html',{'form':form})
         else:
-            messages.error(request, 'Invalid form')
-            return render(request, 'exchange/login.html',{'form':form})
-    form = UserLoginForm()
-    return render(request, 'exchange/login.html',{'form':form})
+            return self.form_invalid(form)
 
-@login_required
-def logout_request(request):
-    logout(request)
-    return redirect('base')
+    def form_invalid(self, form):
+        messages.error(self.request, 'Invalid username or password.')
+        return super().form_invalid(form)
+
+    def get_success_url(self):
+        return reverse('userview', kwargs={'username': self.request.user.username})
+
+  
+class logout_request(View):
+    @method_decorator(login_required)
+    def get(self, request):
+        logout(request)
+        return redirect('base')
 
 @login_required
 def add_book_request(request, username):
@@ -132,6 +128,47 @@ def remove_book(request):
         Book.objects.filter(id__in=selected_books, owner=request.user).delete()
     book=Book.objects.filter(owner=request.user)
     return render(request, 'exchange/remove_book.html',{'books':book})
+
+""" class UserView(DetailView):
+    model = User
+    template_name = 'exchange/user.html'
+
+    def get(self, request, *args, **kwargs):
+       return render(request, self.template_name, self.get_context_data())
+    
+    def get_context_data(self, **kwargs):
+        context = super().get_context_data(**kwargs)
+        user = get_object_or_404(User, username=self.kwargs['username'])
+        context['books'] = Book.objects.filter(owner=user)
+        context['book_request_for_requester'] = BookRequest.objects.filter(requester=user, status='pending')
+        context['book_requests'] = BookRequest.objects.filter(recipient=user, status='pending')
+        context['request_user'] = User.objects.get(id=self.request.user.id)
+        return context
+
+    def post(self, request, *args, **kwargs):
+        if 'accept' in request.POST:
+            form = AcceptForm(request.POST)
+            if form.is_valid():
+                request_id = form.cleaned_data['request_id']
+                accept_book_request(request, request_id)
+        elif 'reject' in request.POST:
+            form = RejectForm(request.POST)
+            if form.is_valid():
+                request_id = form.cleaned_data['request_id']
+                decline_book_request(request, request_id)
+
+        if 'cancel' in request.POST:
+            form=CancelForm(request.POST)
+            if form.is_valid():
+                request_id=form.cleaned_data['request_id']
+                book_requester_myrequest=BookRequest.objects.get(id=request_id)
+                book_requester_myrequest.delete()
+                return redirect('userview', username=request.user.username) """
+    
+
+
+    
+    
  
 #userview
 login_required(login_url='login')
@@ -170,7 +207,7 @@ def userview(request, username):
         'request_user':request_user,
         'book_requests':book_requests,
         })
-
+ 
 def search(request):
     if request.method == 'POST':
         form = SearchForm(request.POST)
