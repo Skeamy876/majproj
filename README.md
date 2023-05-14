@@ -5,7 +5,9 @@ How to Run:
 2. pipenv install --dev
 
 then activate virtual environment: 
+
 4. pipenv shell
+
 5. pipenv install django
 
 
