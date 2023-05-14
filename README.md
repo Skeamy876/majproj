@@ -10,7 +10,8 @@ How to Run:
 then activate virtual environment: 
 
 4. pipenv shell
-5. pipenv install django
-6. python install -r requirements.txt
+5. activate
+6. pip install django
+7. python install -r requirements.txt
 
 
