@@ -6,23 +6,32 @@
 {% load static %}
 
 {%block content%}
-<div class="mx-auto" style="width: 500px;">
-   
-    <h1>login</h1>
-    <form  method="post" class="form-group">
-        {%csrf_token%}
-        <div class="form-floating mb-3"> 
-            {{form|crispy}}
-            <button type="submit" class="btn btn-primary">
-                <input type="submit" class="btn btn-primary">
-            </button> 
-        </div>
-        {% for field in form %}
-            {% for error in field.errors %}
-                <div class="alert alert-danger">{{ error }}</div>
-            {% endfor %}
-        {% endfor %}
-    </form>
+<div class="mx-auto card m-5 shadow p-3 mb-5 bg-body-tertiary rounded" style="width: 500px;">
+    <div class="card-body">
+        <h3 class="card-title text-center">Login</h3>
+        <form class="row g-3 needs-validation m-4" method="POST" novalidate>
+            {%csrf_token%}
+            <div class="md-4">
+                <label for="validationCustomUsername" class="form-label">Username</label>
+                <div class="input-group has-validation">
+                <span class="input-group-text" id="inputGroupPrepend">@</span>
+                <input type="text" class="form-control"  name="username"  id="validationCustomUsername" aria-describedby="inputGroupPrepend" required>
+                <div class="invalid-feedback">
+                    Please choose a username.
+                </div>
+                </div>
+            </div>
+            <div class="md-4">
+                <label for="validationCustom01" class="form-label">Password</label>
+                <input type="Password" class="form-control"  name="password"  id="validationCustom01" value="Mark" required>
+                <div class="valid-feedback">
+                  Looks good!
+                </div>
+              </div>
+            <div class="col-12">
+                <input type="submit" class="btn btn-primary" value="Login">
+            </div>
+        </form>
 </div>
 
 {%endblock%}

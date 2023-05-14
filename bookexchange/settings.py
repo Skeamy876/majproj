@@ -41,6 +41,7 @@ INSTALLED_APPS = [
     'exchange',
     'crispy_forms',
     'debug_toolbar',
+    'bootstrap5',
 
 
 ]

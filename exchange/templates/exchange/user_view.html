@@ -2,9 +2,12 @@
 {%block title%}
 {%endblock%}
 {%block content%}
+{% load static %}
   {% if user.is_authenticated%}
-    <div class="ms-3">
-      <h1>Welcome, {{user.first_name}}</h1>
+    <div class=" container-fluid ms-3">
+      <h1>Dashboard</h1>
+
+      <h4>Welcome, {{user.first_name}}</h4>
 
 
       <div class="container ms-0">
@@ -13,8 +16,14 @@
             <h3 class="mt-5 ">Books</h3>
             <ul class="list-group mb-lg-4" style="width: 300px;">
               {% for book in books %}
-              <li class="list-group-item">{{ book.title }} by {{ book.author }}
-              </li>
+              {% comment %} <li class="list-group-item">{{ book.title }} by {{ book.author }}</li> {% endcomment %}
+              <div class="card" style="width: 18rem;">
+                <a  href="{% url 'book_details' book.id %}">  <img src="{% static 'images/bookicon.png' %}"  class="card-img-top" alt="icon" >
+                  <div class="card-body">
+                    <h5 class="card-title">{{book.title}}</h5>
+                    <p class="card-text">{{book.author}}</p>
+                  </div></a>
+              </div>
               {% endfor %}
             </ul>
           
