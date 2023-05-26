@@ -15,14 +15,22 @@ from django.db.models import Q
 #Base index view
 class BaseView(TemplateView):
     template_name = 'exchange/base.html'
+    
+
+class Home(TemplateView):
+    template_name = 'exchange/home.html'
 
 
 class RegistrationView(CreateView):
-    model = User
     template_name = 'exchange/register.html'
     form_class = myUserCreationform
-    success_url = '/login/'
 
+    def post(self, request, *args, **kwargs):
+        form = self.form_class(request.POST)
+        if form.is_valid():
+            form.save()
+            return redirect('login') 
+        return render(request, self.template_name, {'form': form})
 
 class LoginView(FormView):
     model = User
@@ -53,7 +61,7 @@ class logout_request(View):
     @method_decorator(login_required)
     def get(self, request):
         logout(request)
-        return redirect('base')
+        return redirect('home')
 
 @login_required
 def add_book_request(request, username):

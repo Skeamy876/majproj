@@ -4,15 +4,14 @@ from django import forms
 from django.contrib.auth import authenticate,get_user_model
 
 
+
 class myUserCreationform(UserCreationForm):
-    email = forms.EmailField(label='Email', max_length=254)
-    first_name = forms.CharField(label='First Name', max_length=30)
-    last_name = forms.CharField(label='Last Name', max_length=30)
-    has_books = forms.BooleanField(label='Has Books', required=False)
-    class Meta(UserCreationForm.Meta):
+    email = forms.EmailField(required=True)
+    has_books = forms.BooleanField(required=False)
+    class Meta:
         model = User
-        fields = UserCreationForm.Meta.fields + ('email', 'first_name','last_name','has_books')
-#hellooo
+        fields = ['username', 'email', 'password1', 'password2', 'has_books']
+
 
 class myUserChangeForm(UserChangeForm):
     password1 = forms.CharField(label='Password', widget=forms.PasswordInput)
@@ -25,7 +24,6 @@ class myUserChangeForm(UserChangeForm):
 class UserLoginForm(forms.Form):
     username=forms.CharField()
     password=forms.CharField()
-
     def clean(self,*args,**kwargs):
         username=self.cleaned_data.get('username')
         password=self.cleaned_data.get('password')

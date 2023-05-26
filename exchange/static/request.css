@@ -1,0 +1,190 @@
+header {
+    background-color: #22313F;
+    color: #fff;
+    display: flex;
+    justify-content: space-between;
+    padding: 20px;
+  }
+  
+  h1 {
+    margin: 0;
+  }
+  
+  nav{
+    background-color: #f2f2f2;
+    border-bottom: 1px solid #ccc;
+  }
+
+  nav ul {
+     list-style: none;
+    margin: 0;
+padding: 0;
+display: flex;
+  }
+  
+  nav li {
+    margin: 0 10px;
+  }
+  
+  nav a {
+    display: block;
+    color: #333;
+    text-decoration: none;
+    padding: 10px;
+transition: background-color 0.3s ease;
+  }
+  
+  main {
+    padding: 20px;
+  }
+  
+  h2 {
+    margin-top: 0;
+  }
+  
+  form {
+    margin-bottom: 20px;
+  }
+  
+  input[type="text"] {
+    padding: 10px;
+    border: none;
+    border-radius: 5px;
+    margin-right: 10px;
+    width: 60%;
+  }
+  
+  button[type="submit"] {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+  }
+  
+  .book-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-gap: 20px;
+  }
+  
+  .book-list li {
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    padding: 10px;
+    text-align: center;
+  }
+  
+  .book-list li img {
+    max-width: 100%;
+    margin-bottom: 10px;
+  }
+  
+  .book-list li h3 {
+    margin: 0;
+    font-size: 1.2rem;
+    font-weight: bold;
+  }
+  
+  .book-list li p {
+    margin: 0;
+    font-size: 1rem;
+  }
+  
+  .book-list li button {
+    background-color: #333;
+    color: #fff;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.3s ease;
+  }
+  
+  .book-list li button:hover {
+    background-color: #555;
+  }
+  
+  .book-list li .requested {
+    background-color: #ffdab9;
+  }
+  
+  .book-list li .exchanged {
+    background-color: #90ee90;
+  }
+  
+  .book-list li .timestamp {
+    font-size: 0.8rem;
+    margin-top: 10px;
+  }
+  
+  .notification-panel {
+    position: fixed;
+    top: 0;
+    right: 0;
+    background-color: #fff;
+    width: 300px;
+    height: 100%;
+    box-shadow: -1px 0 10px rgba(0, 0, 0, 0.1);
+    z-index: 1;
+    transform: translateX(300px);
+    transition: transform 0.3s ease;
+  }
+  
+  .notification-panel.active {
+    transform: translateX(0);
+  }
+  
+  .notification-panel h2 {
+    margin: 0;
+    padding: 20px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .notification-panel ul {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+  }
+  
+  .notification-panel li {
+    padding: 10px;
+    border-bottom: 1px solid #ddd;
+  }
+  
+  .notification-panel li:last-child {
+    border-bottom: none;
+  }
+  
+  .notification-panel li .title {
+    font-weight: bold;
+  }
+  
+  .notification-panel li .timestamp {
+    font-size: 0.8rem;
+    color: #999;
+  }
+  
+  .notification-icon {
+    position: relative;
+  }
+  
+  .notification-icon .badge {
+    position: absolute;
+    top: -10px;
+    right: -10px;
+    background-color: #333;
+    color: #fff;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    font-size: 0.8rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
