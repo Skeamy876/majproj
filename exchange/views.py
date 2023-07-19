@@ -208,7 +208,7 @@ def userview(request, username):
                 book_requester_myrequest.delete()
                 return redirect('userview', username=request.user.username)
 
-    return render(request, 'exchange/user_view.html',{
+    return render(request, 'exchange/dashboard.html',{
         'user':user,
         'books':books,
         'book_request_for_requester':book_request_for_requester,

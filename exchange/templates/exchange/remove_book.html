@@ -1,9 +1,27 @@
 {%extends "exchange/base.html"%}
 {%block title%}
+{% load static %}
+
 {%endblock%}
 {%block content%}
-{% if user.is_authenticated%}
-    <h1>Books Avalilable: </h1>
+
+
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
+
+<header>
+  <h1>Book Exchange Dashboard</h1>
+</header>
+<nav>
+  <ul>
+    <li><a href="{% url 'add_book_request' user.id %}">Add Books</a></li>
+    <li><a href="{% url 'request_books' request.user.id %}">Request</a></li>
+    <li><a href="{% url 'remove_book' %}">Remove </a></li>
+    
+  </ul>
+</nav>
+<div class="mx-auto" style="width: 500px;">
+  <br>
+  <h1>Books Avalilable: </h1>
     <form method="post">
       {% csrf_token %}
       {% for book in books %}
@@ -11,6 +29,11 @@
       {% endfor %}
       <input type="submit" value="Delete">
     </form>
+</div>
+
+
+
+    
     
   <!--   {% if book_removed %}
     <div class="alert alert-success" role="alert">
@@ -33,6 +56,5 @@
     {% endfor %}
     {% endif %} -->
 
-{%endif%}
 
 {%endblock%}

@@ -9,8 +9,6 @@
 </head>
 <body>
     {%block content%}
-        <h2>Notifications</h2>
-        {{book_requests|length}}
         {%if book_requests|length == 0%}
         <p>No new notifications</p>
         {%else%}

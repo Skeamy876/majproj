@@ -1,12 +1,30 @@
 {%extends 'exchange/base.html'%}
   {%block title%}
-    <h1 class="mb-5">Books for avalilable for request: </h1>
   {%endblock%}
-
+  {% load static %}
 
 
 {%block content%}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
 
+<header>
+    <h1>Book Exchange Dashboard</h1>
+</header>
+  <nav>
+    <ul>
+      <li><a href="{% url 'add_book_request' user.id %}">Add Books</a></li>
+      <li><a href="{% url 'request_books' request.user.id %}">Request</a></li>
+      <li><a href="{% url 'remove_book' %}">Remove </a></li>
+      
+    </ul>
+  </nav>
+
+
+  <br>
+
+
+
+<h1 class="mb-5">Books for avalilable for request: </h1>
 {%for book in books%}
   <ul class="list-group mb-lg-4" style="width: 300px;">
     <li class="list-group-item"><a href="{% url 'book_details' book.id %}" style="color: black;">{{book.title}} by {{book.author}}</a></li>

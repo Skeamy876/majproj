@@ -43,9 +43,10 @@ user=get_user_model()
 class add_book(forms.ModelForm):
     author=forms.CharField()
     title=forms.CharField()
+    isbn=forms.CharField()
     class Meta:
         model=Book
-        fields=["author","title"]
+        fields=["author","title", "isbn"]
 
 
 class AcceptForm(forms.Form):

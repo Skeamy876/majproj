@@ -23,11 +23,13 @@ class User(AbstractUser):
         return reverse('userview', kwargs={'username':self.username})
     
 class Book(models.Model):
-    title = models.CharField(max_length=50)
+    title = models.CharField(max_length=50, default='N/A')
     author = models.CharField(max_length=50)
     owner = models.ForeignKey(User, on_delete=models.CASCADE, related_name='owned_books')
     borrower = models.ForeignKey(User, on_delete=models.SET_NULL, null=True, related_name='borrowed_books')
     is_available = models.BooleanField(default=True)
+    isbn = models.CharField(max_length=50)
+
     objects = models.Manager()
     def __str__(self):
         return self.title
