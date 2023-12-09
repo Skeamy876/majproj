@@ -89,12 +89,14 @@ WSGI_APPLICATION = 'bookexchange.wsgi.application'
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
+        'DATABASE': 'bookexchange',
         'NAME':'bookexchange',
         'USER': 'postgres',
-        'PASSWORD': 'admin',
+        'PASSWORD': 'pwd1234',
         'HOST ': 'localhost',
         'PORT ': '5432',
     }
+    
 }
 
 
