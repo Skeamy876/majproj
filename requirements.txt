@@ -5,6 +5,8 @@ Django==4.2.8
 django-bootstrap-v5==1.0.11
 django-crispy-forms==1.14.0
 django_debug_toolbar==3.8.1
+gunicorn==21.2.0
+packaging==23.2
 Pillow==9.4.0
 psycopg2==2.9.5
 soupsieve==2.5
