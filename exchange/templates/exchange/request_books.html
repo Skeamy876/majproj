@@ -24,12 +24,23 @@
 
 
 
-<h1 class="mb-5">Books for avalilable for request: </h1>
-{%for book in books%}
-  <ul class="list-group mb-lg-4" style="width: 300px;">
-    <li class="list-group-item"><a href="{% url 'book_details' book.id %}" style="color: black;">{{book.title}} by {{book.author}}</a></li>
-  </ul>
-{%endfor%}
+ 
+<div clas="request-content">
+  <h1 class="mb-5">Books available for request: </h1>
+  <br>
+  {%for book in books%}
+    <ul class="list-group" style="width: 300px;">
+      <li class="list-group-item">
+        <a href="{% url 'book_details' book.id %}" style="color: black;">
+          <img src="{% static 'images/bookicon.png' %}"   alt="Book cover" >
+          <h4>{{book.title}}</h4>
+          <p>Author : {{book.author}}</p>
+        </a>
+    </li>
+    </ul>
+  {%endfor%}
+</div>
+
   
     
 

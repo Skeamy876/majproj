@@ -25,9 +25,13 @@
     <form method="post">
       {% csrf_token %}
       {% for book in books %}
-        <input type="checkbox" name="books" value="{{ book.id }}"> {{ book.title }} by {{book.author}}<br>
+        <input type="checkbox" name="books" value="{{ book.id }}"> {{ book.title }} by {{book.author}} <br> <br>
       {% endfor %}
-      <input type="submit" value="Delete">
+      {% if books %}
+        <input type="submit" value="Delete" style="background-color: #f44336; color: white; padding: 14px 20px; border: none; cursor: pointer; width: 100%; opacity: 0.9;">
+      {% else %}
+        <p>No books are available.</p>
+      {% endif %}
     </form>
 </div>
 
