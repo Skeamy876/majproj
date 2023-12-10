@@ -1,15 +1,28 @@
 {% extends 'exchange/base.html' %}
+{% load static %}
 
 
-{% block title %}
-
-{% if user.is_authenticated %}
-<div class="ms-5">
-    <h1>{{books.title}}</h1>
-    <p>{{books.author}}</p>
-    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#exampleModal" >
-        <a href="{% url 'book_request_sent' books.id%}">Request Book</a> 
-    </button>
+{% block content %}
+<link rel="stylesheet" href="{% static 'dashboard.css' %}">
+<div class= "book-details-container">
+    <header>
+        <h1>Book Exchange Dashboard</h1>
+    </header>
+    <nav>
+        <ul>
+        <li><a href="{% url 'add_book_request' user.id %}">Add Books</a></li>
+        <li><a href="{% url 'request_books' request.user.id %}">Request</a></li>
+        <li><a href="{% url 'remove_book' %}">Remove </a></li>
+        </ul>
+    </nav>
+    <br>
+    <div class="book-details">
+        <h1>{{books.title}}</h1>
+        <p>{{books.author}}</p>
+        <p>{{books.isbn}}</p>
+        <button type="button" data-bs-toggle="modal" data-bs-target="#exampleModal" >
+            <a href="{% url 'book_request_sent' books.id%}">Request Book</a> 
+        </button>
+    </div>
 </div>
-{% endif %}
 {% endblock %}

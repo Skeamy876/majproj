@@ -15,7 +15,6 @@
  
  
 
-
   /* Add styles for the welcome section */
 
   /* Center align the text in the welcome div */
@@ -86,7 +85,6 @@
   text-decoration: none;
   font-size: 17px;
   margin-top: 50px;
-  margin-left: 140px; /* Add some spacing between links and buttons */
   margin-bottom: 20px;
   padding: 10px 30px; /* Add some padding to the links and buttons */
   border-radius: 20px; /* Make the buttons oval shaped */
@@ -98,12 +96,14 @@
 
 .headingpreview{
     color:black;
+    height: 100px;
 }
 
 
 
 .book-item h4{
     color: #22313F;
+    font-style: bold;
     text-align: center;
 }
 
@@ -120,16 +120,10 @@
 .book-item img{
     display: block;
     align-items: center;
-    max-width: 100%;
+    width: 100%;
     transition: transform 0.2s ease-in-out;
 }
 
-
-  .books {
-    display: grid;
-    grid-template-columns: repeat(3, 1fr);
-    gap: 20px;
-  }
   
   #gallery-of-books {
     margin-top: 50px; /* Adjust the top margin as needed */
@@ -140,8 +134,8 @@
     display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
-    padding: 10px;
+    width: 50%;
+    padding: 15px;
   }
   
   .book-item img {
@@ -158,8 +152,28 @@
     margin: 5px 0;
   }
   
+  .books{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    text-align: center;
+    padding: 5px;
+}
+
+@media screen and (max-width: 800px) {
+    .books{
+        flex-direction: column;
+    }
+}
   .book-item button {
-    margin-top: 10px;
+    margin: auto; 
+    padding: 10px 20px;
+    border-radius: 20px;
+    background-color: #8B6E4D;
+    color: #fff;
+    border: none;
+    font-size: 16px;
+
   }
   
 

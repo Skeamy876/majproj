@@ -30,14 +30,18 @@
       <section>
         <h2>My Books</h2>
         <ul class="book-list">
-          {%for book in books%}
-            <li>
-               <img src="{% static 'images/bookicon.png' %}"   alt="Book cover" >
-              <h3>{{book.title}}</h3>
-              <p>{{book.title}}</p>
-             
-            </li>
-          {% endfor %}
+          {% if books %}
+            {%for book in books%}
+              <li>
+                <img src="{% static 'images/bookicon.png' %}"   alt="Book cover" >
+                <h3>{{book.title}}</h3>
+                <p>{{book.title}}</p>
+              
+              </li>
+            {% endfor %}
+          {% else %}
+            <p>You have no books.</p>
+          {% endif %}
         </ul>
       </section>
     </main>

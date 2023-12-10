@@ -17,8 +17,6 @@
     </div>
   </section>
 
-
-  
 <!-- Book List Section -->
 <section id="book-list-section">
 <div id="book-list"></div>
@@ -29,38 +27,38 @@
 
 <!-- Gallery of Books and Sidebar -->
 
-<div id="gallery-of-books">
-<div class="headingpreview">
-  <h1>Preview Books Available</h1>
-</div>
-<div class="books">
-  <!-- Book items -->
-  <div class="book-item">
-    <img src="{% static 'images/book1.jpg' %}" alt="Book 1">
-    <p>Book Name: Book 1</p>
-    <p>Author: Author 1</p>
-    <button onclick="window.location.href='{% url 'login' %}';" class="btn btn-primary">Request</button>
-</div> 
-<div class="book-item">
-    <img src="{% static 'images/book2.jpg' %}" alt="Book 2">
-    <p>Book Name: Book 2</p>
-    <p>Author: Author 2</p>
-    <button onclick="window.location.href='{% url 'login' %}';" class="btn btn-primary">Request</button>
-</div>
-<div class="book-item">
-    <img src="{% static 'images/book3.jpg' %}" alt="Book 3" class="btn btn-primary">
-    <p>Book Name: Book 3</p>
-    <p>Author: Author 3</p>
-    <button onclick="window.location.href='{% url 'login' %}';" class="btn btn-primary">Request</button>
-</div>
-<div class="book-item">
-  <img src="{% static 'images/book3.jpg' %}" alt="Book 3">
-  <p>Book Name: Book 3</p>
-  <p>Author: Author 3</p>
-  <button onclick="window.location.href='{% url 'login' %}';" class="btn btn-primary">Request</button>
-</div>
-<!-- Add more book items here -->
-</div>
+<section id="gallery-of-books">
+  <div class="headingpreview">
+    <h1>Preview Books Available</h1>
+  </div>
+  <div class="books">
+    <!-- Book items -->
+    <div class="book-item">
+      <img src="{% static 'images/book1.jpg' %}" alt="Book 1">
+      <p>Book Name: Book 1</p>
+      <p>Author: Author 1</p>
+      <button onclick="window.location.href='{% url 'login' %}';" class="btn btn-primary">Request</button>
+    </div> 
+    <div class="book-item">
+        <img src="{% static 'images/book2.jpg' %}" alt="Book 2">
+        <p>Book Name: Book 2</p>
+        <p>Author: Author 2</p>
+        <button onclick="window.location.href='{% url 'login' %}';" class="btn btn-primary">Request</button>
+    </div>
+    <div class="book-item">
+        <img src="{% static 'images/book3.jpg' %}" alt="Book 3" class="btn btn-primary">
+        <p>Book Name: Book 3</p>
+        <p>Author: Author 3</p>
+        <button onclick="window.location.href='{% url 'login' %}';" class="btn btn-primary">Request</button>
+    </div>
+    <div class="book-item">
+      <img src="{% static 'images/book3.jpg' %}" alt="Book 3">
+      <p>Book Name: Book 3</p>
+      <p>Author: Author 3</p>
+      <button onclick="window.location.href='{% url 'login' %}';" class="btn btn-primary">Request</button>
+    </div>
+  <!-- Add more book items here -->
+  </div>
 
 </section>
 <br>
