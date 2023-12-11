@@ -1,11 +1,12 @@
 asgiref==3.7.2
 beautifulsoup4==4.12.2
+-e git+https://github.com/Skeamy876/majproj.git@9907cd837a222c1dccc4c191317cc1722820e780#egg=bookexchangeapp
+Brotli==1.1.0
 dj-database-url==2.1.0
 Django==4.2.8
 django-bootstrap-v5==1.0.11
 django-crispy-forms==1.14.0
 django_debug_toolbar==3.8.1
-#added 
 gunicorn==21.2.0
 packaging==23.2
 Pillow==9.4.0
@@ -14,3 +15,4 @@ soupsieve==2.5
 sqlparse==0.4.4
 typing_extensions==4.8.0
 tzdata==2023.3
+whitenoise==6.6.0
